@@ -147,14 +147,15 @@
         this.errorText = '';
       },
       doneTapped: function() {
-        if (!this.$.serverConfig.value) {
+        const userInputConfig = this.$.serverConfig.value;
+        if (!userInputConfig) {
           this.showError('',
               'Please paste the output from the installation process before proceeding.');
           return;
         }
         this.showConnection = true;
         this.fire('ManualServerEntered', {
-          userInputConfig: this.$.serverConfig.value
+          userInputConfig: userInputConfig.replace(/\s+/g, '') // Remove whitespace
         });
       },
       cancelTapped: function() {
